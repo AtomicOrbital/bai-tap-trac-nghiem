@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SignInForm from './SignIn/SignIn';
 import SignUpForm from './SignUp/SignUp';
-import '../style.css'
+
 export default function Controller() {
     const [type, setType] = useState("signIn");
     const handleOnClick = text => {
