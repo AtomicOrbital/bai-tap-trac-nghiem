@@ -1,10 +1,12 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import "./Profile.css"
 
-export const Admin = () => {
+export const Profile = () => {
 
-    const [user, setUser] = useState()
+    const [user, setUser] = useState();
+    const [history, setHistory] = useState([])
 
     const getProfile = async () => {
         const res = await axios({
@@ -12,9 +14,10 @@ export const Admin = () => {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
         })
-        console.log("res", res);
         if(res?.status === 200) {
-            setUser(res?.data)
+            console.log("res?.data", res?.data);
+            setUser(res?.data?.userDetails)
+            setHistory(res?.data?.exerciseHistory)
         }
     }
 
@@ -25,7 +28,7 @@ export const Admin = () => {
     return(
         <div {...{
             style: {
-                backgroundColor: "gray",
+                backgroundColor: "wheat",
                 minWidth: "100vw",
                 minHeight: "100vh",
                 display: "flex",
@@ -36,21 +39,21 @@ export const Admin = () => {
             <div {...{
                 style: {
                     backgroundColor: "#d89a27",
-                    width: "50vw",
-                    height: "50vh",
+                    width: "80vw",
+                    minHeight: "60vh",
                     display: "flex",
                     alignItems: "center",
                     padding: "16px",
                     borderRadius: "5px",
                     flexDirection: "column",
-                    gap: "12px"
+                    gap: "24px"
                 }
             }}>
                 <div {...{
                     style: {
-                        width: "100%",
-                        height: "30px",
-                        // borderRadius: "50%",
+                        width: "100px",
+                        height: "100px",
+                        borderRadius: "50%",
                         textAlign: "center",
                         backgroundColor: "gray",
                         display: "flex",
@@ -69,10 +72,10 @@ export const Admin = () => {
                         color: "white"
                     }
                 }}>
-                Bảng điều khiển
+                {user?.name ?? "UserName"}
                 </p>
                 </div>
-                {/* <div {...{
+                <div {...{
                     style: {
                         display:"flex",
                         flexDirection: "column",
@@ -86,20 +89,48 @@ export const Admin = () => {
                             fontWeight: "500"
                         }
                     }}>
-                        Points
-                    </p> */}
+                        History
+                    </p>
                     <div {...{
-                        style: {
-                            width: "100%",
-                            height: "100%",
-                            backgroundColor: "wheat",
-                            borderRadius: "5px"
-                        }
+                        className: "w-[60vw] bg-[#f5f5f5] rounded-[5px] overflow-auto"
                     }}>
-
+                        {history?.map((h) => {
+                            return<Exercise key={h} {...{data: h}}/>
+                        })}
                     </div>
                 </div>
             </div>
-        // </div>
+        </div>
     )
 }
+
+
+const Exercise = ({ data }) => {
+    const {exercise} = data
+    const formatter = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hour12: false
+      });
+      const createdAtFormatted = formatter.format(data.createdAt);
+    return (
+      <div className="bg-white shadow p-[12px] mx-auto grid grid-cols-[4fr_1fr]">
+        <div>
+        <p className="text-xl font-bold">{exercise.name}</p>
+        <p className="text-gray-700">{exercise.description}</p>
+        <p className="text-gray-500 text-sm mt-2">{createdAtFormatted}</p>
+        </div>
+        <div {...{
+            className: "w-[100%] h-[100%] flex justify-center items-center"
+        }}>
+            <p {...{
+                className: "text-[24px]"
+            }}>{data.result * 100}/100</p>
+        </div>
+        </div>
+    );
+  };
