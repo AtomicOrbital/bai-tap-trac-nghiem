@@ -6,7 +6,7 @@ export const BaiTapTracNghiemService = {
     signIn: (thongTinDangNhap) => {
         // console.log("abc");
         return axios({
-            url: 'https://1bf0-113-160-14-17.ap.ngrok.io/api/auth/login',
+            url: 'http://localhost:8080/api/auth/login',
             method: 'POST',
             data: thongTinDangNhap,
             // headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
@@ -14,7 +14,7 @@ export const BaiTapTracNghiemService = {
     },
     signUp: (thongTinDangKy) => {
         return axios({
-            url: 'https://1bf0-113-160-14-17.ap.ngrok.io/api/auth/signup',
+            url: 'http://localhost:8080/api/auth/signup',
             method: 'POST',
             data: thongTinDangKy
         })

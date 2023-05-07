@@ -18,6 +18,7 @@ export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
     switch (action.type) {
 
         case 'DANG_NHAP_ACTION' : {
+            console.log("action.thongTinDangNhap.token", action.thongTinDangNhap.token);
             localStorage.setItem('token', JSON.stringify(action.thongTinDangNhap.token));
             // localStorage.setItem('token',action.thongTinDangNhap.token);
             return {...state};
