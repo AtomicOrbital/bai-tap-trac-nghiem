@@ -84,13 +84,13 @@ const AddQuestion = ({setRefesh}) => {
                 add
             </Button>
             <Modal {...{
-                title: "Create Category",
+                title: "Question",
                 open: isModalOpen,
                 onOk: handleOk,
                 onCancel: handleCancel,
             }}>
                 <Input {...{
-                    placeholder: "Category's name",
+                    placeholder: "Question",
                     defaultValue: "",
                     onChange: handleChangeDes,
                     value: description,

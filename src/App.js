@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./style.css";
 import SignInForm from "./Login/SignIn/SignIn";
 import SignUpForm from "./Login/SignUp/SignUp";
@@ -8,12 +8,12 @@ import { Router, Route } from "react-router-dom";
 import { Switch } from 'react-router-dom';
 import SignIn from '../src/Login/SignIn/SignIn'
 import Home from "./Pages/Home/Home";
-import {Admin} from "./Pages/Admin/Admin";
-import {Profile} from "./Pages/Profile/Profile";
-import {Category} from "./Pages/Category/Category";
+import { Admin } from "./Pages/Admin/Admin";
+import { Profile } from "./Pages/Profile/Profile";
+import { Category } from "./Pages/Category/Category";
 import { Exercise } from "./Pages/Exercise/Exercise";
 import { Question } from "./Pages/Question/Question";
-import {DoExercise} from "./Pages/DoExercise/DoExercise"
+import { DoExercise } from "./Pages/DoExercise/DoExercise"
 import { DoPage } from "./Pages/DoExercise/DoPage";
 
 export const history = createBrowserHistory();
@@ -38,6 +38,7 @@ export default function App() {
         <Route path="/do-exercise/:id" component={DoPage} />
         <Route path="/do-exercise" exact component={DoExercise} />
         <Route path="/question" component={Question} />
+        <Route path="/*" component={Controller} />
       </Switch>
     </Router>
   );

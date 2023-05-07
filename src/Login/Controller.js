@@ -14,7 +14,7 @@ export default function Controller() {
         "container " + (type === "signUp" ? "right-panel-active" : "");
     return (
         <div>
-            <h2>Sign in/up Form</h2>
+            {/* <h2>Sign in/up Form</h2> */}
             <div className={containerClass} id="container">
                 <SignUpForm />
                 <SignInForm />
